@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestApp>
+  <WriteCard>Yes</WriteCard>
+  <DeleteCard>Yes</DeleteCard>
+  <LoadConfirmation>Yes</LoadConfirmation>
+  <ClearAfterRemove>Yes</ClearAfterRemove>
+  <CurrentKeyA>0</CurrentKeyA>
+  <NumberOfKey>2</NumberOfKey>
+  <KeyA0>A1B2C3D4E5F6</KeyA0>
+  <KeyA1>4265726C696E</KeyA1>
+</TestApp>

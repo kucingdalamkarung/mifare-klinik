@@ -1,0 +1,169 @@
+﻿<Application x:Class="Mifare_App.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Mifare_App"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <Style x:Key="OpenSans">
+            <Setter Property="TextElement.FontFamily" Value="/fonts/#Open Sans"></Setter>
+        </Style>
+
+        <Style x:Key="OpenSansBold">
+            <Setter Property="TextElement.FontFamily" Value="/fonts/#Open Sans-Bold"></Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="#555555"/>
+            <Setter Property="Padding" Value="0 5"/>
+        </Style>
+
+        <Style TargetType="{x:Type StackPanel}">
+            <Setter Property="Margin" Value="1 8"></Setter>
+        </Style>
+
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Margin" Value="0 4"></Setter>
+            <Setter Property="Width" Value="350"></Setter>
+            <Setter Property="Background" Value="#F0F0F0"></Setter>
+            <Setter Property="Padding" Value="10"></Setter>
+            <Setter Property="Foreground" Value="#555555"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="true">
+                            <Border DockPanel.Dock="Bottom" Margin="5,0,0,0">
+                                <TextBlock Text="{Binding ElementName=customAdorner, Path=AdornedElement.(Validation.Errors)[0].ErrorContent}" VerticalAlignment="center" HorizontalAlignment="Left" Foreground="#D94452">
+                                </TextBlock>
+                            </Border>
+                            <AdornedElementPlaceholder Name="customAdorner" VerticalAlignment="Center" >
+                                <Border BorderBrush="#D94452" BorderThickness="0.5" />
+                            </AdornedElementPlaceholder>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--
+        <Style TargetType="{x:Type DatePicker}">
+            <Setter Property="Margin" Value="0 4"></Setter>
+            <Setter Property="Background" Value="#F0F0F0"></Setter>
+            <Setter Property="Padding" Value="2"></Setter>
+            <Setter Property="Foreground" Value="#555555"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="BorderThickness" Value="{Binding BorderThink}"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Style.Resources>
+                <Style TargetType="DatePickerTextBox">
+                    <Setter Property="Background" Value="#F0F0F0"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="BorderBrush" Value="#F0F0F0"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                </Style>
+                <Border x:Key="BorderThink" BorderThickness="0" BorderBrush="#F0F0F0"></Border>
+            </Style.Resources>
+        </Style>
+        -->
+
+        <Style TargetType="{x:Type DatePicker}">
+            <Setter Property="Margin" Value="0 4"></Setter>
+            <Setter Property="Background" Value="#F0F0F0"></Setter>
+            <Setter Property="Padding" Value="2"></Setter>
+            <Setter Property="Foreground" Value="#555555"></Setter>
+            <Setter Property="BorderThickness" Value="{Binding BorderThink}"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style TargetType="{x:Type Control}" x:Key="DatePickerTextBoxStyle">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Background" Value="{x:Null}"/>
+        </Style>
+
+        <Style TargetType="{x:Type DatePickerTextBox}" >
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <TextBox x:Name="PART_TextBox"
+                             Text="{Binding Path=SelectedDate, StringFormat={}{0:yyyy-MM-dd}, RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}}" Style="{StaticResource DatePickerTextBoxStyle}" >
+                        </TextBox>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="Width" Value="100"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="Padding" Value="7"></Setter>
+            <Setter Property="Margin" Value="0 4"></Setter>
+            <Setter Property="Foreground" Value="#555555"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="0 10 10 0"></Setter>
+            <Setter Property="Padding" Value="5"></Setter>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Foreground" Value="#555555"></Setter>
+        </Style>
+
+        <ResourceDictionary x:Key="ColorResources" Source="resources/color.xaml"/>
+
+        <Style TargetType="{x:Type DataGrid}">
+            <Setter Property="ColumnHeaderStyle" Value="{DynamicResource DGCHeaderStyle}"/>
+            <Setter Property="RowStyle" Value="{DynamicResource DGCStyle}"/>
+            <Setter Property="GridLinesVisibility" Value="None"/>
+            <Setter Property="CellStyle" Value="{DynamicResource DGCCellStyle}"/>
+            <Setter Property="AlternatingRowBackground" Value="White"/>
+            <Setter Property="AlternationCount" Value="2"/>
+        </Style>
+
+        <Style x:Key="DGCHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Background" Value="#F0F0F0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Foreground" Value="#555555"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="15 5"/>
+        </Style>
+
+        <Style x:Key="DGCStyle" TargetType="DataGridRow">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Foreground" Value="#555555"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#E4ECF5"/>
+                    <Setter Property="Foreground" Value="#555555"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Trigger>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                    <Setter Property="Background" Value="#E4ECF5"/>
+                    <Setter Property="Foreground" Value="#555555"/>
+                </Trigger>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                    <Setter Property="Background" Value="white"/>
+                    <Setter Property="Foreground" Value="#555555"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Name="DGCCellStyle" TargetType="DataGridCell">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="15 5"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{x:Null}"/>
+                    <Setter Property="Foreground" Value="#4A88DA"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Application.Resources>
+</Application>
